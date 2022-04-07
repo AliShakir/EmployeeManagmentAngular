@@ -1,0 +1,133 @@
+<div class="card mb-4 box-shadow mt-2">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">Add New Employee</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" id="my-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="bmd-label-static">First Name</label>
+                    <input type="hidden" />
+                    <input type="text" name="firstName" class="form-control" placeholder="First name" formControlName="firstName" 
+                    [ngClass]="{'is-invalid': f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched || submitted),
+                                'is-valid':f['firstName'].valid && (f['firstName'].dirty || f['firstName'].touched || submitted)}">  
+
+                    <div *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched || submitted)">
+                        <small class="text-danger">
+                            First name is required
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Last Name</label>
+
+                    <input type="text" name="lastName" class="form-control" placeholder="Last name" formControlName="lastName"
+                    [ngClass]="{'is-invalid': f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched || submitted),
+                    'is-valid':f['lastName'].valid && (f['lastName'].dirty || f['lastName'].touched || submitted)}">
+
+                    <div *ngIf="f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched || submitted)" >
+                        <small class="text-danger">
+                            Last name is required
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Date Of Birth</label>
+                    
+                    <input type="date" name="DateOfBirth" class="form-control" formControlName="DateOfBirth"
+                    [ngClass]="{'is-invalid': f['DateOfBirth'].invalid && (f['DateOfBirth'].dirty || f['DateOfBirth'].touched || submitted),
+                    'is-valid':f['DateOfBirth'].valid && (f['DateOfBirth'].dirty || f['DateOfBirth'].touched || submitted)}">
+                   
+                    <div *ngIf="f['DateOfBirth'].invalid && (f['DateOfBirth'].dirty || f['DateOfBirth'].touched || submitted) && f['DateOfBirth'].errors?.['required']">
+                        <small class="text-danger">
+                            Date of birth is required
+                        </small>
+                    </div>                    
+                    <div *ngIf="f['DateOfBirth'].invalid && (f['DateOfBirth'].dirty || f['DateOfBirth'].touched || submitted) && f['DateOfBirth'].errors?.['minAge']">
+                        <small class="text-danger">
+                            Minimum age must be 18
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Age</label>
+                    <input type="number" value="10" name="age" class="form-control">                    
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Salary</label>
+                    <input type="number" name="salary" class="form-control" formControlName="salary"
+                    [ngClass]="{'is-invalid': f['salary'].invalid && (f['salary'].dirty || f['salary'].touched || submitted),
+                    'is-valid':f['salary'].valid && (f['salary'].dirty || f['salary'].touched || submitted)}">
+
+                    <div *ngIf="f['salary'].invalid && (f['salary'].dirty || f['salary'].touched || submitted)">
+                        <small class="text-danger" *ngIf="f['salary'].errors && f['salary'].errors?.['required']">
+                            Salary is required 
+                        </small>
+                        <small class="text-danger" *ngIf="f['salary'].errors && f['salary'].errors?.['min']">
+                            Salary should be greater than $1000
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Username</label>
+                    
+                    <input type="text" name="salay" class="form-control" placeholder="Username" formControlName="username"
+                    [ngClass]="{'is-invalid': f['username'].invalid && (f['username'].dirty || f['username'].touched || submitted),
+                    'is-valid':f['username'].valid && (f['username'].dirty || f['username'].touched || submitted)}">
+                    
+                    <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched || submitted)">
+                        <small class="text-danger" 
+                        *ngIf="f['username'].errors && f['username'].errors?.['required'] ">
+                            Email is required 
+                        </small>
+                        <small class="text-danger" *ngIf="f['username'].errors && f['username'].errors?.['email']">
+                            Invalid email provided.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Password</label>
+                    
+                    <input type="password" name="salay"  class="form-control" placeholder="Password" formControlName="password"
+                    [ngClass]="{'is-invalid': f['password'].invalid && (f['password'].dirty || f['password'].touched || submitted),
+                    'is-valid':f['password'].valid && (f['password'].dirty || f['password'].touched || submitted)}">
+                    
+                    <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched || submitted)">
+                        <small class="text-danger" *ngIf="f['password'].errors && f['password'].errors?.['required']">
+                            Password is required 
+                        </small>
+                    </div>
+                    <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched || submitted) || f['password'].errors?.['minLength']">
+                        <small class="text-danger">
+                            Password should be atleast 8 characters
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="bmd-label-static">Confirm Password</label>                    
+                    <input type="password" name="salay" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword"
+                    [ngClass]="{'is-invalid': f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched || submitted),
+                    'is-valid':f['confirmPassword'].valid && (f['confirmPassword'].dirty || f['confirmPassword'].touched || submitted)}">
+                    
+                    <div *ngIf="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched || submitted)  
+                    && f['confirmPassword'].errors?.['required']">
+                        <small class="text-danger">
+                            Confirm Password is required 
+                        </small>
+                    </div>
+                    <div *ngIf="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched || submitted)
+                    && f['confirmPassword'].errors?.['compareValidator']">
+                        <small class="text-danger">
+                            Password and Confirm Password do not match
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+    <div class="card-footer">
+        <input type="submit" class="btn btn-primary btn-lg pull-right" name="3Button" value="Save" form="my-form" [disabled]="!employeeForm.valid">
+        <input type="button" class="btn btn-dark btn-lg pull-right ml-2" name="3Button" value="Back To List">
+    </div>
+  </div>
